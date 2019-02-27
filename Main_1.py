@@ -18,12 +18,13 @@ def open_browser(browser, web_page="None"):
 # def kill_browser(handler):
 #     handler.close()
 #
-#
-# def close_rodo(handler):
-#     rodo_popup = '/html/body/div[3]/div[12]/div/div/a'
-#     rodo_guzior = handler.find_element_by_xpath(rodo_popup)
-#     rodo_guzior.click()
-#
+
+def close_rodo(handler):
+    rodo_popup = '/html/body/div[4]/div[15]/div/div/a'
+    #rodo_popup = '/html/body/div[3]/div[12]/div/div/a'
+    rodo_guzior = handler.find_element_by_xpath(rodo_popup)
+    rodo_guzior.click()
+
 #
 # def fulfill_indicator(handler, xpath, value):
 #     try:
@@ -93,21 +94,45 @@ def list_offers(handler, number_of_offers):
             print(e)
 
 
+def next_page(handler, xpath):
+    try:
+        next_button = handler.find_element_by_xpath(xpath)
+        next_button.click()
+    except Exception as e:
+        print(e)
+
 
 list_length = 32
 number_of_subsites_xpath = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[6]'
-
 webpage = "https://www.otomoto.pl/osobowe/od-2008/?search%5Bfilter_float_price%3Afrom%5D=5000&search%5Bfilter_float_price%3Ato%5D=10000&search%5Bfilter_float_year%3Ato%5D=2015&search%5Bnew_used%5D=on"
+
 web_browser_handler = open_browser("firefox", webpage)
-read_value(web_browser_handler, number_of_subsites_xpath)
+close_rodo(web_browser_handler)
+
+next_butt_xpath1 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[7]/a'
+next_butt_xpath2 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[8]/a'
+next_butt_xpath3 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[10]/a'
 
 list_offers(web_browser_handler, list_length)
+next_page(web_browser_handler, next_butt_xpath1)
+
+list_offers(web_browser_handler, list_length)
+next_page(web_browser_handler, next_butt_xpath2)
+
+list_offers(web_browser_handler, list_length)
+next_page(web_browser_handler, next_butt_xpath2)
+
+for i in range (0, 10):
+    list_offers(web_browser_handler, list_length)
+    next_page(web_browser_handler, next_butt_xpath3)
 
 
-# close_rodo(web_browser_handler)
 # fulfill_indicator(web_browser_handler, low_price_xpath, low_price_value)
 # fulfill_indicator(web_browser_handler, high_price_xpath, high_price_value)
 # fulfill_indicator(web_browser_handler, yr_of_prod_from_xpath, yr_of_prod_from_value)
 # fulfill_indicator(web_browser_handler, yr_of_prod_to_xpath, yr_of_prod_to_value)
 # click_button(web_browser_handler, button_xpath)
 # kill_browser(web_browser_handler)
+
+# 3 /html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[8]/a
+# 4 /html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[10]/a
