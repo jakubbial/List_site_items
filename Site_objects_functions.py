@@ -47,12 +47,17 @@ def list_offers(handler, number_of_offers):
         xpath_title = xpath + '/div[2]/div[1]/h2'
         xpath_price = xpath + '/div[2]/div[2]/div/span[1]'
         xpath_year = xpath + '/div[2]/ul/li[1]'
+        xpath_engine = xpath + '/div[2]/ul/li[4]/span'
+        xpath_mileage = xpath + '/div[2]/ul/li[2]/span'
+
 
         try:
             title = handler.find_element_by_xpath(xpath_title).text
             price = handler.find_element_by_xpath(xpath_price).text
             year = handler.find_element_by_xpath(xpath_year).text
-            print(title, ';', price, ';', year)
+            engine = handler.find_element_by_xpath(xpath_engine).text
+            mileage = handler.find_element_by_xpath(xpath_mileage).text
+            print(title, ';', price, ';', year, ';', engine, ';', mileage)
         except Exception as e:
             print(e)
 
