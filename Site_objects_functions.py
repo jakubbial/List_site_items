@@ -71,25 +71,25 @@ def click_button(handler, xpath):
 
 
 def list_items(handler, number_of_subsites):
+    number_of_items_on_site = 32
     next_butt_xpath1 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[7]/a'
     next_butt_xpath2 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[8]/a'
-    next_butt_xpath3 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[10]/a'
+    next_butt_xpath3 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[8]/a'
+    next_butt_xpath4 = '/html/body/div[4]/div[2]/section/div[2]/div[2]/ul/li[10]/a'
 
-    number_of_items_on_site = 32
+    for i in range(1, number_of_subsites):
+        if i == 1:
+            list_offers(handler, number_of_items_on_site)
+            click_button(handler, next_butt_xpath1)
 
-    if number_of_subsites >= 1:
-        list_offers(handler, number_of_items_on_site)
-        click_button(handler, next_butt_xpath1)
+        if i == 2:
+            list_offers(handler, number_of_items_on_site)
+            click_button(handler, next_butt_xpath2)
 
-    if number_of_subsites >= 2:
-        list_offers(handler, number_of_items_on_site)
-        click_button(handler, next_butt_xpath2)
-
-    if number_of_subsites >= 3:
-        list_offers(handler, number_of_items_on_site)
-        click_button(handler, next_butt_xpath2)
-
-    if number_of_subsites >= 4:
-        for i in range(0, number_of_subsites-3):
+        if i == 3:
             list_offers(handler, number_of_items_on_site)
             click_button(handler, next_butt_xpath3)
+
+        if i >= 4:
+            list_offers(handler, number_of_items_on_site)
+            click_button(handler, next_butt_xpath4)
